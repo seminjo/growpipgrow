@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f3e8" />
+  <title>Grow, Pip, Grow!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell" id="app">
+    <!-- COVER -->
+    <section class="screen active" id="coverScreen" aria-labelledby="coverTitle">
+      <div class="cover-card">
+        <div class="cover-art" aria-hidden="true">
+          <div class="sun">☀️</div>
+          <div class="cloud">☁️</div>
+          <div class="soil-layer">
+            <div class="seed seed-cover">🌰</div>
+          </div>
+        </div>
+
+        <p class="eyebrow">Interactive English Picture Book</p>
+        <h1 id="coverTitle">Grow, Pip, Grow!</h1>
+        <p class="subtitle">Help Pip grow from a tiny seed into a flower.</p>
+
+        <div class="prediction-box">
+          <p class="prediction-title">What does a seed need to grow?</p>
+          <div class="choice-row">
+            <button class="chip cover-choice" data-cover-choice="Water">💧 Water</button>
+            <button class="chip cover-choice" data-cover-choice="Sun">☀️ Sun</button>
+            <button class="chip cover-choice" data-cover-choice="Candy">🍭 Candy</button>
+          </div>
+          <p id="coverFeedback" class="mini-feedback" aria-live="polite"></p>
+        </div>
+
+        <button class="primary-btn" id="startBtn">Start Story</button>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="screen" id="storyScreen" aria-labelledby="storyText">
+      <header class="topbar">
+        <div class="page-counter" id="pageCounter">Page 1 / 10</div>
+        <div class="grow-meter" aria-label="Pip growth progress">
+          <span id="growthEmoji">🌰</span>
+          <span id="growthLabel">Seed</span>
+        </div>
+      </header>
+
+      <div class="story-card">
+        <div class="illustration" id="illustration" aria-hidden="true"></div>
+
+        <div class="story-content">
+          <p class="story-text" id="storyText"></p>
+
+          <div class="story-actions">
+            <button class="secondary-btn" id="readBtn">🔊 Read to Me</button>
+            <button class="secondary-btn" id="slowBtn" aria-pressed="false">🐢 Slow</button>
+          </div>
+
+          <p class="audio-note" id="audioNote" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <button class="primary-btn next-btn" id="nextBtn" disabled>Next ▶</button>
+    </section>
+
+    <!-- QUESTION -->
+    <section class="screen" id="questionScreen" aria-labelledby="questionText">
+      <div class="question-card">
+        <div class="question-progress" id="questionProgress">Question 1 / 10</div>
+
+        <div class="pip-stage" id="pipStage" aria-hidden="true">
+          <div class="pip-ground"></div>
+          <div class="pip-character" id="pipCharacter">🌰</div>
+        </div>
+
+        <h2 id="questionText">Question</h2>
+        <div class="answers" id="answers"></div>
+
+        <div class="feedback-panel hidden" id="feedbackPanel" aria-live="polite">
+          <p class="feedback-title" id="feedbackTitle"></p>
+          <p class="feedback-text" id="feedbackText"></p>
+          <button class="primary-btn" id="continueBtn">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT -->
+    <section class="screen" id="resultScreen" aria-labelledby="resultTitle">
+      <div class="result-card">
+        <div class="result-flower" aria-hidden="true">🌼</div>
+        <h2 id="resultTitle">Pip grew into a flower!</h2>
+        <p class="subtitle">You finished the story!</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">Story Check</span>
+            <strong id="scoreText">0 / 10</strong>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">New Words</span>
+            <strong id="vocabText">0 / 8 explored</strong>
+          </div>
+        </div>
+
+        <section class="retell-section" aria-labelledby="retellTitle">
+          <h3 id="retellTitle">Retell the Story</h3>
+          <p class="helper">Drag the cards into order, or tap them in order.</p>
+
+          <div class="retell-bank" id="retellBank"></div>
+          <div class="retell-slots" id="retellSlots" aria-label="Story order"></div>
+
+          <div class="retell-actions">
+            <button class="secondary-btn" id="checkRetellBtn">Check Order</button>
+            <button class="secondary-btn" id="resetRetellBtn">Reset</button>
+          </div>
+          <p id="retellFeedback" class="mini-feedback" aria-live="polite"></p>
+        </section>
+
+        <section class="reaction-section" aria-labelledby="reactionTitle">
+          <h3 id="reactionTitle">How did you feel?</h3>
+          <div class="emoji-row" id="emojiRow">
+            <button class="emoji-btn" aria-label="Happy">🙂</button>
+            <button class="emoji-btn" aria-label="Surprised">😮</button>
+            <button class="emoji-btn" aria-label="Loved it">❤️</button>
+          </div>
+
+          <div class="sentence-builder">
+            <span>I like</span>
+            <select id="likeSelect" aria-label="Choose what you liked">
+              <option value="Pip">Pip</option>
+              <option value="the rain">the rain</option>
+              <option value="the flower">the flower</option>
+            </select>
+            <span>because</span>
+            <select id="becauseSelect" aria-label="Choose a reason">
+              <option value="he is brave">he is brave</option>
+              <option value="it helps Pip">it helps Pip</option>
+              <option value="it is beautiful">it is beautiful</option>
+            </select>
+            <span>.</span>
+          </div>
+          <p class="built-sentence" id="builtSentence">I like Pip because he is brave.</p>
+        </section>
+
+        <div class="result-actions">
+          <button class="primary-btn" id="readAgainBtn">Read Again</button>
+          <button class="secondary-btn" id="retellAgainBtn">Retell the Story</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- VOCAB MODAL -->
+  <div class="modal hidden" id="vocabModal" role="dialog" aria-modal="true" aria-labelledby="vocabWord">
+    <div class="modal-card">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close vocabulary card">×</button>
+      <div class="vocab-emoji" id="vocabEmoji">🌱</div>
+      <h2 id="vocabWord">word</h2>
+      <p id="vocabMeaning" class="vocab-meaning"></p>
+      <p id="vocabExample" class="vocab-example"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
